@@ -1,2 +1,2 @@
 # MIS985
-Business Big Data Analysis Course of NSYSU
+Practical Business Analytics of NSYSU
