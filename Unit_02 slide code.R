@@ -16,7 +16,8 @@ num <- 1:5; # equivalent to “num <- c(1,2,3,4,5)”
 lapply( c(sum, mean, prod), FUN = function(f) f(num) )
 
 # Load all datasets and functions on the RStudio server
-library(bigDataR)
+#library(bigDataR)
+library(bigdata)
 
 typeof('abc')
 typeof(9i)
