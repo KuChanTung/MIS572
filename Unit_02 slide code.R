@@ -25,6 +25,7 @@ typeof(123)
 
 v <- c('a','b','1')
 v %in% letters
+#all(TRUE,v>0)
 
 if(T | (a <- 10) ) print('Hi')
 if(T || (a <- 20) ) print('Hi')
