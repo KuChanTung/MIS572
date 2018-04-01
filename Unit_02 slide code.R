@@ -17,7 +17,7 @@ lapply( c(sum, mean, prod), FUN = function(f) f(num) )
 
 # Load all datasets and functions on the RStudio server
 #library(bigDataR)
-library(bigdata)
+library(bigdataR)
 
 typeof('abc')
 typeof(9i)
