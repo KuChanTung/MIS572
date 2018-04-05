@@ -175,7 +175,9 @@ aggr(all[,c(1,4:15)])
 #把資料集分開成訓練與測試等資料集，準備建立模型
 all=all[-3]
 train=all[1:26729, ]
+write.csv(train,file="Shelter Animal Outcomes/train_OK.csv",row.names = T)
 test=all[26730:nrow(all), ]
+write.csv(test,file="Shelter Animal Outcomes/test_OK.csv",row.names = T)
 
 ################################################################################
 #步驟 2 建立模型
