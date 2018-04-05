@@ -2,11 +2,11 @@
 ##步驟1 資料整理
 ########################################################################################
 #1.1 load dataset 並查驗
-train_data_original=read.csv("Shelter Animal Outcomes/train.csv",stringsAsFactors = F)
 #訓練資料集筆數26729筆
+train_data_original=read.csv("Shelter Animal Outcomes/train.csv",header = T,sep = ",",stringsAsFactors = F)
 str(train_data_original)
-test_data_original=read.csv("Shelter Animal Outcomes/test.csv",stringsAsFactors = F)
 #測試資料集筆數11456筆
+test_data_original=read.csv("Shelter Animal Outcomes/test.csv",header = T,sep = ",",stringsAsFactors = F)
 str(test_data_original)
 
 #刪除ID欄位 因為用不到
@@ -148,6 +148,19 @@ library(rpart)
 am=rpart(ADays ~ AnimalType + sex + bea + SimpleBreed + Name, data = all[!is.na(all$ADays), ], method = 'anova')
 all$ADays[is.na(all$ADays)] =predict(am, all[is.na(all$ADays), ])
 
+##################################################################################################################
+#1.5.1 敘述統計
+##################################################################################################################
+#動物年齡最小0天、最大8030天、Q1=60、Q3=1095、中位數365、平均788.3
+summary(all$ADays)
+#四分數間距Q3-Q1=IQR=1035
+IQR(all$ADays)
+#標準差1079.771
+sd(all$ADays)
+#四分位數0%-0 25%-60 50%-365 75%-1095 100%-8030
+quantile(all$ADays)
+######################################################################################
+#把動物年齡小於190天歸類為kid，大於等於190天小於365天歸類為mid,剩下大於等於365天歸類為old
 all$Age=ifelse(all$ADays<190,'Kid',ifelse(all$ADays>=190 & all$ADays<=365,'Mid','Old'))
 all$Age=factor(all$Age)
 all=all[-5]
