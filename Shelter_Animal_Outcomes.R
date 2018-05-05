@@ -200,6 +200,7 @@ aggr(all[,c(1,4:15)])
 #把資料集分開成訓練與測試等資料集，準備建立模型
 #重新依據OutcomeType進行Dataset排序
 all=all[order(all$OutcomeType),]
+fwrite(all,file = "Shelter Animal Outcomes/all.csv",row.names = T)
 #把訓練資料集濾出來
 train=all[1:26729, ]
 #寫入檔案
