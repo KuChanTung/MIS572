@@ -122,7 +122,7 @@ all$Mix=factor(all$Mix,levels = c("Y","N"))
 all$SimpleBreed=factor(all$SimpleBreed)
 all$PureColor=factor(all$PureColor)
 all$SimpleColor=factor(all$SimpleColor)
-all$OutcomeType=factor(all$OutcomeType)
+all$OutcomeType=factor(all$OutcomeType,levels = c('Adoption', 'Died', 'Euthanasia', 'Return_to_owner', 'Transfer'))
 ################################################################################
 #缺值檢查
 library(VIM)
@@ -192,3 +192,9 @@ colnames(xgb_preds)=c('Adoption', 'Died', 'Euthanasia', 'Return_to_owner', 'Tran
 ID=c(1:11456)
 xgb_data=data.frame(ID,xgb_preds)
 fwrite(xgb_data,"Shelter Animal Outcomes/xgb.csv",row.names = F)
+
+#RandomForest
+library(randomForest)
+RF_model=randomForest(OutcomeType ~ Name+AnimalType+sex+Month+Year+TimeofDay+WorkDay+Mix+PureColor+SimpleColor+Age, nrounds=45,data=train,importance=T,proximity=T,do.trace = 100,ntree=1000)
+rf_preds=data.frame(predict(RF_model, test, type='prob'))
+rf_preds=data.frame(ID,predict(RF_model, test, type='prob'))
